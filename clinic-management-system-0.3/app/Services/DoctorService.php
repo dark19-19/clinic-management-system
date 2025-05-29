@@ -45,4 +45,11 @@ class DoctorService extends Service
 
         return $doctor;
     }
+    // Manager Functions:
+
+    public static function showById(int $id)
+    {
+        $doctor = Doctor::findOrFail($id);
+        return $doctor;
+    }
 }

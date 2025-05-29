@@ -14,5 +14,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('', [DoctorController::class, 'store']);
         Route::put('', [DoctorController::class, 'update']);
         Route::get('', [DoctorController::class, 'index']);
+        Route::get('/{id}', [DoctorController::class, 'show']);
     });
 });

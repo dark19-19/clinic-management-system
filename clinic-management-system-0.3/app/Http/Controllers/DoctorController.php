@@ -36,9 +36,12 @@ class DoctorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        $doctor = DoctorService::showById($id);
+        return response()->json([
+            'doctor' => new DoctorResource($doctor)
+        ], 200);
     }
 
     /**
