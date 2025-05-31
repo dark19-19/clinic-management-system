@@ -6,7 +6,6 @@ use App\Http\Requests\StoreDoctorDataRequest;
 use App\Http\Requests\UpdateDoctorDataRequest;
 use App\Http\Resources\DoctorResource;
 use App\Services\DoctorService;
-use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
@@ -20,6 +19,8 @@ class DoctorController extends Controller
             'doctors' => DoctorResource::collection($doctors)
         ], 200);
     }
+
+    //      Manager Functions:
 
     /**
      * Store a newly created resource in storage.
@@ -36,9 +37,17 @@ class DoctorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function showById(int $id)
     {
         $doctor = DoctorService::showById($id);
+        return response()->json([
+            'doctor' => new DoctorResource($doctor)
+        ], 200);
+    }
+
+    public function showByDocId(string $doc_id)
+    {
+        $doctor = DoctorService::showByDocId($doc_id);
         return response()->json([
             'doctor' => new DoctorResource($doctor)
         ], 200);
@@ -55,12 +64,14 @@ class DoctorController extends Controller
             'doctor_data' => new DoctorResource($doctor)
         ], 200);
     }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        DoctorService::destroy($id);
+        return response()->json([
+            'message' => 'Doctor data has been deleted'
+        ], 200);
     }
 }

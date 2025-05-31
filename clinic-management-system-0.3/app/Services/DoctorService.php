@@ -12,14 +12,16 @@ class DoctorService extends Service
     {
         return Doctor::all();
     }
+    // Manager Functions:
+
     public static function storeData(StoreDoctorDataRequest $request)
     {
         $validatedData = $request->validated();
         $doctor = Doctor::where('user_id', $validatedData['user_id'])->firstOrFail();
 
-        $doc_id = function () use ($validatedData) {
+        $doc_id = function () use ($validatedData): string {
             $specilizationPrefix = strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $validatedData['specilization']), 0, 3));
-            $userIdPrefix = str_pad($validatedData['user_id'] ?? rand(100, 999), 3, '0', STR_PAD_LEFT);
+            $userIdPrefix = str_pad($validatedData['user_id'] . rand(100, 999), 3, '0', STR_PAD_LEFT);
             return 'DOC-' . $specilizationPrefix . '-' . $userIdPrefix;
         };
 
@@ -45,11 +47,25 @@ class DoctorService extends Service
 
         return $doctor;
     }
-    // Manager Functions:
-
     public static function showById(int $id)
     {
         $doctor = Doctor::findOrFail($id);
         return $doctor;
+    }
+    public static function showByDocId(string $doc_id)
+    {
+        $doctor = Doctor::where('doc_id', $doc_id)->first();
+        return $doctor;
+    }
+
+    public static function destroy(int $id)
+    {
+        $doctor = Doctor::findOrFail($id);
+        $doctor->update([
+            'spedcilization' => null,
+            'doc_id' => null,
+            'license_number' => null,
+            'qualifications' => null
+        ]);
     }
 }

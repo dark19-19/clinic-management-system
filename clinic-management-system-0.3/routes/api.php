@@ -11,9 +11,11 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanct
 Route::middleware('auth:sanctum')->group(function () {
     //      Doctor Routes:
     Route::prefix('doctor')->group(function () {
-        Route::post('', [DoctorController::class, 'store']);
-        Route::put('', [DoctorController::class, 'update']);
-        Route::get('', [DoctorController::class, 'index']);
-        Route::get('/{id}', [DoctorController::class, 'show']);
+        Route::post('/', [DoctorController::class, 'store']);
+        Route::put('/', [DoctorController::class, 'update']);
+        Route::get('/', [DoctorController::class, 'index']);
+        Route::get('/id/{id}', [DoctorController::class, 'showById']);
+        Route::get('/docId/{doc_id}', [DoctorController::class, 'showByDocId']);
+        Route::delete('/', [DoctorController::class, 'destroy']);
     });
 });
