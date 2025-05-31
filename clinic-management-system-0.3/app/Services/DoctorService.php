@@ -62,7 +62,7 @@ class DoctorService extends Service
     {
         $doctor = Doctor::findOrFail($id);
         $doctor->update([
-            'spedcilization' => null,
+            'specilization' => null,
             'doc_id' => null,
             'license_number' => null,
             'qualifications' => null
