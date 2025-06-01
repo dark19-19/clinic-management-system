@@ -32,4 +32,18 @@ class PatientController extends Controller
             'patients' => PatientResource::collection($patients)
         ], 200);
     }
+    public function show(int $patient_id)
+    {
+        $patient = PatientService::showById($patient_id);
+        return response()->json([
+            'patient' => new PatientResource($patient)
+        ], 200);
+    }
+    public function destroy(int $patient_id)
+    {
+        PatientService::destroy($patient_id);
+        return response()->json([
+            'message' => 'Patient data has been deleted succefully'
+        ], 200);
+    }
 }

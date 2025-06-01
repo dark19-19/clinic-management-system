@@ -33,4 +33,22 @@ class PatientService extends Service
     {
         return Patient::all();
     }
+    public static function showById(int $patient_id)
+    {
+        $patient = Patient::findOrFail($patient_id);
+        return $patient;
+    }
+    public static function destroy(int $patient_id)
+    {
+        $patient = Patient::findOrFail($patient_id);
+        $patient->update([
+            'age' => null,
+            'birth_date' => null,
+            'gender' => null,
+            'address' => null,
+            'blood_group' => null,
+            'medical_history' => null
+        ]);
+        return $patient;
+    }
 }
