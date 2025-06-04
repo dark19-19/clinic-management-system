@@ -12,6 +12,9 @@ Route::prefix('patient')->group(base_path('routes/api/patient.php'));
 // Doctor Functions Routes:
 Route::prefix('doctor')->group(base_path('routes/api/doctor.php'));
 
+// Pharmacist Functions Routes:
+Route::prefix('pharma')->group(base_path('routes/api/pharmacist.php'));
+
 
 
 //          Authentication Routes:
