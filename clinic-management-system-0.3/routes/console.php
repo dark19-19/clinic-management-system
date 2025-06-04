@@ -21,14 +21,16 @@ class $name extends Service
 }
     ");
     fclose($file);
+    $this->info('Service Created');
 });
 
 Artisan::command('make:api-route/{name}', function ($name) {
     $file = fopen(__DIR__ . "/../routes/api/$name.php", 'a');
     file_put_contents(__DIR__ . "/../routes/api/$name.php", "<?php
 
-    use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
 
-    ");
+");
     fclose($file);
+    $this->info('API Route File Created');
 });
