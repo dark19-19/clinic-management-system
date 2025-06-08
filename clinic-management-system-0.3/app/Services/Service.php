@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class Service
+ class Service
 {
-    //
+    protected $validatedData;
 }
