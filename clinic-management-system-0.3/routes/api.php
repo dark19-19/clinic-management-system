@@ -15,8 +15,20 @@ Route::prefix('doctor')->group(base_path('routes/api/doctor.php'));
 // Pharmacist Functions Routes:
 Route::prefix('pharma')->group(base_path('routes/api/pharmacist.php'));
 
-//Appointment Function Routes:
+//Appointment Functions Routes:
 Route::prefix('appointment')->group(base_path('routes/api/appointment.php'));
+
+//Medical Record Functions Routes:
+Route::prefix('record')->group(base_path('routes/api/medical_record.php'));
+
+//Billing Functions Routes:
+Route::prefix('billing')->group(base_path('routes/api/billing.php'));
+
+//Inventory Functions Routes:
+Route::prefix('inventory')->group(base_path('routes/api/inventory.php'));
+
+//Prescription Functions Routes:
+Route::prefix('prescription')->group(base_path('routes/api/prescription.php'));
 
 
 
