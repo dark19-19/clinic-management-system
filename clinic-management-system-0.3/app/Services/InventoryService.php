@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\IfInventoryExistsRequest;
 use App\Http\Requests\StoreInventoryRequest;
 use App\Http\Requests\UpdateInventoryRequest;
 use App\Models\Inventory;
@@ -10,11 +11,12 @@ class InventoryService extends Service
 {
     public static function store(StoreInventoryRequest $request) {
         $validatedData = $request->validated();
-        return Inventory::create([
+        return $validatedData['quantity'] < 0 ? throw new \Exception('You cannot enter a negative quantity') : Inventory::create([
             'name' => $validatedData['name'],
             'quantity' => $validatedData['quantity'],
             'expiry_date' => now()->subYears(2)
         ]);
+
     }
     public static function update(UpdateInventoryRequest $request, int $inventory_id) {
         $validatedData = $request->validated();
@@ -30,5 +32,13 @@ class InventoryService extends Service
     public static function destory(int $inventory_id) {
         $inventory = Inventory::findOrFail($inventory_id);
         $inventory->delete();
+    }
+    public static function exists(IfInventoryExistsRequest $request) {
+        $validatedName = $request->validated();
+        $inventory = Inventory::where('name',$validatedName)->firstOrFail();
+        if($inventory != null && $inventory->quantity != 0) {
+            return true;
+        }
+        return false;
     }
 }
