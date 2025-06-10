@@ -14,7 +14,7 @@ class InventoryService extends Service
         return $validatedData['quantity'] < 0 ? throw new \Exception('You cannot enter a negative quantity') : Inventory::create([
             'name' => $validatedData['name'],
             'quantity' => $validatedData['quantity'],
-            'expiry_date' => now()->subYears(2)
+            'expiry_date' => now()->addYears(2)
         ]);
 
     }
@@ -40,5 +40,15 @@ class InventoryService extends Service
             return true;
         }
         return false;
+    }
+    public static function trackExpiring() {
+        $inventories = Inventory::all();
+        $nearExpiry = [];
+        foreach ($inventories as $inventory) {
+            if($inventory->expiry_date <= now()->addWeek()) {
+                array_push($nearExpiry, $inventory);
+            }
+        }
+        return $nearExpiry;
     }
 }

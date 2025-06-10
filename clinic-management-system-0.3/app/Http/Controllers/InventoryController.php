@@ -51,4 +51,10 @@ class InventoryController extends Controller
             'message' => 'The item you entered is not found'
         ],404);
     }
+    public function trackExpiring() {
+        return response()->json([
+            'message' => 'These are all the items near to expiring date',
+            'inventories' => InventoryService::trackExpiring()
+        ],200);
+    }
 }
