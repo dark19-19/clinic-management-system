@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('doctor_id')->constrained('doctors')->cascadeOnDelete();
             $table->string('diagnosis');
             $table->foreignId('prescription_id')->constrained('prescriptions')->cascadeOnDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

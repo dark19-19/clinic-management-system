@@ -2,7 +2,11 @@
 
 namespace App\Services;
 
- class Service
-{
-    protected $validatedData;
+ abstract class Service
+ {
+     /**
+      * Request Validated Data
+      * @var null|request
+      */
+      protected $validatedData;
 }
