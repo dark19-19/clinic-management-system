@@ -23,6 +23,7 @@ class StoreDoctorDataRequest extends FormRequest
     {
         return [
             'user_id' => 'required|exists:doctors,user_id|integer',
+            'name' => 'required|string|max:255',
             'specilization' => 'required|string|max:255',
             'license_number' => 'string|required|unique:doctors,license_number|max:255',
             'qualifications' => 'string|nullable'

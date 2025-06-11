@@ -23,6 +23,7 @@ class StorePatientDataRequest extends FormRequest
     {
         return [
             'user_id' => 'required|integer|exists:users,id',
+            'name' => 'required|string|max:255',
             'age' => 'nullable|integer|max:80',
             'birth_date' => 'nullable|string|date',
             'gender' => 'nullable|string|in:male,female',
