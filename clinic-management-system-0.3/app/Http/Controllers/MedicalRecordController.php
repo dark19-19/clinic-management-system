@@ -39,4 +39,28 @@ class MedicalRecordController extends Controller
             'message' => 'Record has been deleted'
         ],200);
     }
+    public function showPatientRecords() {
+        return response()->json([
+            'message' => 'Here are your records',
+            'records' => MedicalRecordService::showPatientRecords()
+        ],200);
+    }
+    public function admin_showPatientRecords(int $patient_id) {
+        return response()->json([
+            'message' => 'Here are all the patient records',
+            'records' => MedicalRecordService::admin_showPatientRecords($patient_id)
+        ],200);
+    }
+    public function showRecordsByDoctor() {
+        return response()->json([
+            'message' => 'Here are the records made by you',
+            'records' => MedicalRecordService::showRecordsByDoctor()
+        ],200);
+    }
+    public function admin_showRecordsByDoctor(int $doctor_id) {
+        return response()->json([
+            'message' => 'Here are the records made by the doctor you requested',
+            'records' => MedicalRecordService::admin_showRecordsByDoctor($doctor_id)
+        ],200);
+    }
 }
