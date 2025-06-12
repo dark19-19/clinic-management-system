@@ -3,9 +3,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Authentication Functions Routes:
-//Route::prefix('auth')->group(base_path('routes/api/auth.php'));
-
 // Patient Functions Routes:
 Route::prefix('patient')->group(base_path('routes/api/patient.php'));
 
@@ -20,9 +17,6 @@ Route::prefix('appointment')->group(base_path('routes/api/appointment.php'));
 
 //Medical Record Functions Routes:
 Route::prefix('record')->group(base_path('routes/api/medical_record.php'));
-
-//Billing Functions Routes:
-Route::prefix('billing')->group(base_path('routes/api/billing.php'));
 
 //Inventory Functions Routes:
 Route::prefix('inventory')->group(base_path('routes/api/inventory.php'));
