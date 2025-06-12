@@ -23,7 +23,7 @@ class UpdateDoctorDataRequest extends FormRequest
     {
         return [
             'user_id' => 'integer|required|exists:doctors,user_id|unique:doctors,user_id',
-            'specilization' => 'sometimes|string|max:255',
+            'specialization' => 'sometimes|string|max:255',
             'license_number' => 'sometimes|string|max:255',
             'qualifications' => 'sometimes|string'
         ];

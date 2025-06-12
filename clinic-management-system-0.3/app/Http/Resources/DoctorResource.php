@@ -17,7 +17,7 @@ class DoctorResource extends JsonResource
         return [
             'doctor_id' => $this->doc_id,
             'user_id' => $this->user_id,
-            'specilization' => $this->specilization,
+            'specialization' => $this->specilization,
             'license_number' => $this->license_number,
             'qualifications' => $this->qualifications,
             'data_stored_at' => date_format($this->updated_at, 'Y-m-d')
