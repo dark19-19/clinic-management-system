@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Prescription extends Model
 {
     protected $fillable = ['patient_id','doctor_id','medicines'];
+    protected $casts = ['medicines' => 'array'];
     public function patient() {
         return $this->hasOne(Patient::class);
     }
