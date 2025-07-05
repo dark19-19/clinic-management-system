@@ -1,0 +1,82 @@
+:root {
+    --main-color: #3A7BD5;
+    --secondary-color: #00D2FF;
+    --dark-color: #1A3E72;
+    --success: #4CAF50;
+    --warning: #FFC107;
+    --danger: #F44336;
+    --neutral: #F5F7FA;
+    --primary-text: #2D3748;
+    --secondary-text: #718096;
+    --light-text: #FFFFFF;
+    --box-shadow-color: rgba(26, 62, 114, 0.19);
+}
+
+body {
+    background-color: var(--neutral);
+}
+
+.auth-form {
+    margin: 60px auto;
+    width: 600px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background: var(--neutral);
+    box-shadow: 1px 1px 10px 10px var(--box-shadow-color);
+}
+
+.auth-form .form-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    color: var(--dark-color);
+}
+
+.auth-form label {
+    color: var(--primary-text);
+}
+
+.auth-form .form-text {
+    color: var(--secondary-text);
+}
+
+.auth-form input {
+    background-color: var(--neutral);
+    color: var(--primary-text);
+    transition: 0.3s;
+    border-color: var(--secondary-text);
+}
+.auth-form select {
+    background-color: var(--neutral);
+    color: var(--primary-text);
+    transition: 0.3s;
+    border-color: var(--secondary-text);
+}
+
+.auth-form input:focus {
+    background-color: var(--light-text);
+    color: var(--primary-text);
+}
+
+.auth-form .foot {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--dark-color);
+    color: var(--primary-text);
+}
+
+.auth-form .foot .form-way {
+    text-decoration: none;
+    color: var(--main-color);
+}
+.auth-form button {
+    background-color: var(--main-color);
+    color: var(--light-text);
+    border: 1px solid var(--light-text);
+}
+.auth-form button:hover {
+    background-color: var(--dark-color);
+    border-color: var(--light-text);
+}
+
