@@ -22,8 +22,11 @@ class UpdatePatientDataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address' => 'sometimes|string',
-            'madical_history' => 'sometimes|string'
+            'address' => 'sometimes|string|nullable',
+            'medical_history' => 'sometimes|string|nullable',
+            'phone' => 'string|sometimes|nullable',
+            'insurance_info' => 'string|sometimes|nullable',
+            'emergency_contact' => 'string|sometimes|nullable'
         ];
     }
 }

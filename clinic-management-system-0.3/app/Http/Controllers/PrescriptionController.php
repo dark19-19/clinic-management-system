@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePrescriptionRequest;
 use App\Http\Requests\UpdatePrescriptionRequest;
+use App\Models\MedicalRecord;
+use App\Models\Medicine;
+use App\Models\Prescription;
+use App\Services\MedicineService;
 use App\Services\PrescriptionService;
 use Illuminate\Http\Request;
 
 class PrescriptionController extends Controller
 {
     public function store(StorePrescriptionRequest $request) {
-        return response()->json([
-            'message' => 'Prescription has been saved',
-            'data' => PrescriptionService::store($request)
-        ],201);
+        PrescriptionService::store($request);
+        return redirect(route('prescription.index'));
     }
     public function update(UpdatePrescriptionRequest $request, int $prescription_id) {
         return response()->json([
@@ -62,5 +64,22 @@ class PrescriptionController extends Controller
             'message' => 'Here are all the prescriptions made by this doctor',
             'prescriptions' => PrescriptionService::admin_showPrescriptionsByDoctor($doctor_id)
         ],200);
+    }
+    public function showCenter() {
+        $prescriptions = PrescriptionService::index();
+        return view('admins.prescs.index', [
+            'prescs' => $prescriptions
+        ]);
+    }
+    public function showStore() {
+        $records = MedicalRecord::with('patient')
+            ->with('doctor')
+            ->whereDate('created_at', today())
+            ->get();
+        $medicines = MedicineService::index();
+        return view('admins.prescs.create', [
+            'records' => $records,
+            'medicines' => $medicines
+        ]);
     }
 }

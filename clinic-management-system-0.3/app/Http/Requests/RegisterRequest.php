@@ -24,8 +24,7 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'string|required|max:255',
             'email' => 'string|required|email|max:255|unique:users,email',
-            'password' => 'string|confirmed|max:255',
-            'role' => 'string|nullable|in:patient,doctor,pharmacist'
+            'password' => 'string|confirmed|max:255'
         ];
     }
 }

@@ -22,14 +22,18 @@ class StorePatientDataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|integer|exists:users,id',
-            'name' => 'required|string|max:255',
-            'age' => 'nullable|integer|max:80',
-            'birth_date' => 'nullable|string|date',
-            'gender' => 'nullable|string|in:male,female',
-            'address' => 'string|nullable',
-            'blood_group' => 'nullable|string|max:5',
+            'email' => 'required|string|email|max:255|exists:users,email|unique:patients,email',
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'birth_date' => 'required|date',
+            'gender' => 'required|string|in:male,female',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:15|unique:patients,phone',
+            'emergency_contact' => 'required|string|max:255|unique:patients,emergency_contact',
+            'insurance_info' => 'nullable|string|max:255',
+            'blood_group' => 'required|string|in:A+,B+,AB+,O+,A-,B-,AB-,O-',
             'medical_history' => 'nullable|string'
+
         ];
     }
 }

@@ -15,11 +15,12 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         $roles = [
-            'employee',
-            'manager',
+            'admin',
+            'staff',
             'doctor',
             'patient',
-            'pharmacist'
+            'pharmacist',
+            'guest'
         ];
         foreach ($roles as $role) {
             Role::create([
@@ -41,7 +42,7 @@ class RolePermissionSeeder extends Seeder
                 'name' => $permission
             ]);
         }
-        $employee = Role::where('name', 'employee')->first();
+        $employee = Role::where('name', 'staff')->first();
         $employee->permissions()->sync(Permission::whereIn('name', [
             'store-data',
             'edit-data',
@@ -49,7 +50,7 @@ class RolePermissionSeeder extends Seeder
             'check-appointment',
             'update-appointment'
         ])->pluck('id')->toArray());
-        $manager = Role::where('name', 'manager')->first();
+        $manager = Role::where('name', 'admin')->first();
         $manager->permissions()->sync(Permission::whereIn('name', [
             'store-data',
             'edit-data',

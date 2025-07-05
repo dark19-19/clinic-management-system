@@ -13,12 +13,21 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->string('doc_id')->unique()->nullable();
+            $table->string('doc_id')->unique();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('name');
-            $table->string('specialization')->nullable();
-            $table->string('license_number')->unique()->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email')->unique();
+            $table->date('birth_date');
+            $table->enum('gender',['male','female']);
+            $table->string('address');
+            $table->string('phone');
+            $table->string('specialization');
+            $table->string('license_number')->unique();
             $table->text('qualifications')->nullable();
+            $table->string('call_hours');
+            $table->string('available_hours');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

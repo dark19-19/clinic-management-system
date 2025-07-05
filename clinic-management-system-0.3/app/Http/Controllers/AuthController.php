@@ -15,25 +15,40 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $user = AuthService::register($request);
-        return response()->json([
-            'message' => 'Account has been created succefully',
-            'account' => new UserResource($user)
-        ], 201);
+//        return response()->json([
+//            'message' => 'Account has been created succefully',
+//            'account' => new UserResource($user)
+//        ], 201);
+        return redirect(route('login', absolute: false));
     }
+
     public function login(LoginRequest $request)
     {
-        $data = AuthService::login($request);
-        return response()->json([
-            'message' => 'Your login succeeded',
-            'account' => new UserResource($data['user']),
-            'token' => $data['token']
-        ], 200);
+        $user = AuthService::login($request);
+        if ($user->role_id == 1) {
+            return redirect()->intended(route('admin.dashboard', absolute: false));
+        }
+        return redirect()->intended(route('user.home', absolute: false));
     }
+
     public function logout(Request $request)
     {
         AuthService::logout($request);
-        return response()->json([
-            'message' => 'You have logged out'
-        ], 200);
+        return redirect()->intended(route('login'));
+    }
+
+    public function showRegister()
+    {
+        return view('auth.register');
+    }
+
+    public function showLogin()
+    {
+        return view('auth.login');
+    }
+
+    public function showLogout()
+    {
+        return view('auth.logout');
     }
 }

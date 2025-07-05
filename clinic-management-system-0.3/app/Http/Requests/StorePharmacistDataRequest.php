@@ -22,8 +22,15 @@ class StorePharmacistDataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|integer|exists:users,id',
-            'license_number' => 'string|required|unique'
+            'email' => 'required|string|email|max:255|exists:users,email|unique:pharmacists,email',
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'birth_date' => 'required|date',
+            'gender' => 'required|string|in:male,female',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:15|unique:pharmacists,phone',
+            'license_number' => 'required|string|unique:pharmacists,license_number',
+            'work_hours' => 'required|string'
         ];
     }
 }

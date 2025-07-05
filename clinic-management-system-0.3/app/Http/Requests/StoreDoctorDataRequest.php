@@ -22,11 +22,18 @@ class StoreDoctorDataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:doctors,user_id|integer',
-            'name' => 'required|string|max:255',
             'specialization' => 'required|string|max:255',
             'license_number' => 'string|required|unique:doctors,license_number|max:255',
-            'qualifications' => 'string|nullable'
+            'qualifications' => 'string|nullable',
+            'first_name' => 'string|required|max:50',
+            'last_name' => 'string|required|max:50',
+            'email' => 'required|string|email|exists:users,email|unique:doctors,email',
+            'birth_date' => 'required|date',
+            'gender' => 'string|required|in:male,female',
+            'address' => 'string|required',
+            'phone' => 'string|required|max:15|unique:doctors,phone',
+            'call_hours' => 'string|required',
+            'available_hours' => 'string|required'
         ];
     }
 }

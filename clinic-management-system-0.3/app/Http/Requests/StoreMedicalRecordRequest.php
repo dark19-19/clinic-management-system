@@ -22,10 +22,12 @@ class StoreMedicalRecordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'patient_id' => 'integer|required|exists:patients,id',
-            'doctor_id' => 'integer|required|exists:doctors,id',
+            'patient_email' => 'string|email|required|max:50|exists:patients,email',
+            'appointment_id' => 'integer|exists:appointments,id',
             'diagnosis' => 'string|required',
-            'prescription_id' => 'integer|required|exists:prescriptions,id|unique:medical_records,prescription_id'
+            'treatment' => 'string|required',
+            'notes' => 'string|required',
+            'follow_up_date' => 'date|nullable'
         ];
     }
 }

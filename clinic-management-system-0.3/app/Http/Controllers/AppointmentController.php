@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use App\Models\Appointment;
+use App\Models\Doctor;
 use App\Services\AppointmentService;
 use Illuminate\Http\Request;
 
@@ -33,46 +34,32 @@ class AppointmentController extends Controller
     }
     public function cancel(int $appointment_id) {
         AppointmentService::cancel($appointment_id);
-        return response()->json([
-            'message' => 'Your appointment has been canceled, and it will be deleted after 24 hours',
-        ]);
     }
-    public function approve(int $appointment_id) {
-        $appointment = AppointmentService::approve($appointment_id);
-        return response()->json([
-            'message' => 'Appointment has been approved',
-            'appointment' => $appointment
-        ]);
+    public function approve(int $appointment_id, Request $request) {
+        AppointmentService::approve($appointment_id,$request);
+        return redirect(route('patient.appointment.index'));
     }
     public function reject(int $appointment_id) {
-        $appointment = AppointmentService::reject($appointment_id);
-        return response()->json([
-            'message' => 'Appointment has been rejected',
-            'appointment' => $appointment
+        AppointmentService::reject($appointment_id);
+        return redirect(route('patient.appointment.index'));
+    }
+    public function destroy(int $appointment_id) {
+        AppointmentService::destroy($appointment_id);
+        return redirect(route('patient.appointment.index'));
+    }
+
+    public function showCenter() {
+        $appointments = AppointmentService::index();
+        return view('admins.appointments.patients-appointments',[
+            'appointments' => $appointments
         ]);
     }
-    public function index() {
-        return response()->json([
-            'message' => 'These are all the appointments',
-            'appointments' => AppointmentService::index()
-        ]);
-    }
-    public function show(int $appointment_id) {
-        return response()->json([
-            'message' => 'This is the appointment you requested for',
-            'appointment' => AppointmentService::show($appointment_id)
-        ]);
-    }
-    public function showPatientAppointments() {
-        return response()->json([
-            'message' => 'These are your appointments',
-            'appointments' => AppointmentService::showPatientAppointments()
-        ]);
-    }
-    public function admin_showPatientAppointments(int $patient_id) {
-        return response()->json([
-            'message' => 'These are the petient appointments',
-            'appointments' => AppointmentService::admin_showPatientAppointments($patient_id)
+    public function showApprove(int $appointment_id) {
+        $appointment = Appointment::findOrFail($appointment_id);
+        $doctors = Doctor::all();
+        return view('admins.appointments.patient-approve', [
+            'appointment' => $appointment,
+            'doctors' => $doctors
         ]);
     }
 }

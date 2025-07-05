@@ -3,12 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedicalRecordController;
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('',MedicalRecordController::class);
+Route::middleware('auth')->group(function () {
+    Route::middleware('role:admin')->group(function () {
+       Route::get('/main', [MedicalRecordController::class , 'showAdminCenter'])->name('admin.record.index');
+    });
+    Route::get('/create', [MedicalRecordController::class, 'showRecordCreateForm'])->name('record.create');
 
-    Route::get('/patient',[MedicalRecordController::class,'showPatientRecords']);
-    Route::get('/doctor',[MedicalRecordController::class,'showRecordsByDoctor']);
-
-    Route::get('/patient/{patientId}',[MedicalRecordController::class,'admin_showPatientRecords']);
-    Route::get('/doctor/{doctorId}',[MedicalRecordController::class,'admin_showRecordsByDoctor']);
+    Route::post('/', [MedicalRecordController::class, 'store'])->name('record.store');
 });

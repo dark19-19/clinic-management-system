@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Prescription extends Model
 {
-    protected $fillable = ['patient_id','doctor_id','medicines'];
-    protected $casts = ['medicines' => 'array'];
-    public function patient() {
-        return $this->hasOne(Patient::class);
+    use SoftDeletes;
+    protected $fillable = ['medical_record_id','medicine_id','dosage','frequency','duration','instructions'];
+    public function medicalRecord() {
+        return $this->belongsTo(MedicalRecord::class);
     }
-    public function doctor() {
-        return $this->hasOne(Doctor::class);
+    public function medicine() {
+        return $this->belongsTo(Medicine::class);
     }
 }

@@ -4,7 +4,10 @@
 use Illuminate\Support\Facades\Route;
 
 // Authentication Functions Routes:
-Route::prefix('auth')->group(base_path('routes/api/auth.php'));
+//Route::prefix('auth')->group(base_path('routes/api/auth.php'));
+
+// Admin Functions Routes:
+Route::prefix('admin')->group(base_path('routes/api/admin.php'));
 
 // Patient Functions Routes:
 Route::prefix('patient')->group(base_path('routes/api/patient.php'));
@@ -21,12 +24,17 @@ Route::prefix('appointment')->group(base_path('routes/api/appointment.php'));
 //Medical Record Functions Routes:
 Route::prefix('record')->group(base_path('routes/api/medical_record.php'));
 
-//Inventory Functions Routes:
-Route::prefix('inventory')->group(base_path('routes/api/inventory.php'));
-
 //Prescription Functions Routes:
 Route::prefix('prescription')->group(base_path('routes/api/prescription.php'));
 
+//Staff Functions Routes:
+Route::prefix('staff')->group(base_path('routes/api/staff.php'));
+
+//Medicine Functions Routes:
+Route::prefix('medicine')->group(base_path('routes/api/medicine.php'));
+
+//Payment Functions Routes:
+Route::prefix('payment')->group(base_path('routes/api/payment.php'));
 
 
 //          Authentication Routes:

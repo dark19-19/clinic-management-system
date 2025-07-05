@@ -13,8 +13,17 @@ return new class extends Migration
     {
         Schema::create('pharmacists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('license_number')->unique()->nullable();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email')->unique();
+            $table->date('birth_date');
+            $table->enum('gender',['male','female']);
+            $table->string('address');
+            $table->string('phone');
+            $table->string('license_number')->unique();
+            $table->string('work_hours');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

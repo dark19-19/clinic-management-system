@@ -8,5 +8,664 @@
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    'Segoe UI Symbol', 'Noto Color Emoji';
+}
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+::selection {
+    background-color: var(--main-color);
+    color: var(--light-text);
+}
+
+a {
+    text-decoration: none;
+    color: var(--main-color);
+    transition: 0.3s;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+:root {
+    --main-color: #3A7BD5;
+    --secondary-color: #00D2FF;
+    --dark-color: #1A3E72;
+    --success: #4CAF50;
+    --warning: #FFC107;
+    --danger: #F44336;
+    --neutral: #F5F7FA;
+    --primary-text: #2D3748;
+    --secondary-text: #718096;
+    --light-text: #FFFFFF;
+    --box-shadow-color: rgba(26, 62, 114, 0.19);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--neutral);
+    /*height: 200vh;*/
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.validation-error {
+    color: var(--danger);
+}
+nav {
+    padding-left: 30px;
+    padding-top: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(58, 123, 213, 0.7);
+    backdrop-filter: blur(3px);
+    border-bottom: 1px solid var(--dark-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .nav-item .nav-link {
+    color: var(--light-text);
+    font-size: 16px;
+}
+
+nav .nav-item > .active {
+    background-color: inherit;
+    color: var(--light-text);
+}
+
+nav .nav-item .nav-link.active {
+    background-color: inherit;
+    color: var(--light-text);
+}
+
+nav .nav-item .nav-link:hover {
+    border-color: var(--light-text);
+}
+
+.nav-page-title {
+    margin-left: 40px;
+    display: block;
+    font-size: 30px;
+    color: var(--dark-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-page-title:hover {
+    color: var(--dark-color);
+}
+
+nav .dropdown.user {
+    margin-right: 20px;
+}
+
+nav .dropdown button {
+    color: var(--light-text);
+    font-size: 16px;
+}
+
+nav .dropdown button:hover {
+    border-color: var(--light-text);
+    color: var(--light-text);
+}
+
+nav .dropdown button.show {
+    border-color: var(--light-text);
+    color: var(--light-text);
+}
+
+nav .dropdown button:active {
+    border-color: var(--light-text);
+    color: var(--light-text);
+}
+nav .dropdown > a {
+    color: var(--light-text);
+    font-size: 16px;
+}
+nav .dropdown > a:hover {
+    border-color: var(--light-text);
+    color: var(--light-text);
+}
+nav .dropdown > a.show {
+    border-color: var(--light-text);
+    color: var(--light-text);
+}
+nav .dropdown > a:active {
+    border-color: var(--light-text);
+    color: var(--light-text);
+}
+nav .dropdown > a.active {
+    color: var(--light-text);
+    border-color: var(--light-text);
+}
+
+nav .dropdown .dropdown-menu {
+    background-color: rgba(58, 123, 213, 0.8);
+    backdrop-filter: blur(3px);
+    border-width: 0 2px 2px 2px;
+    border-color: var(--light-text);
+    border-style: solid;
+}
+
+nav .dropdown .dropdown-menu a {
+    color: var(--light-text);
+}
+
+nav .dropdown .dropdown-menu a:hover {
+    background-color: rgba(58, 123, 213, 0.7);
+    backdrop-filter: blur(3px);
+}
+
+.page-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    background-color: var(--main-color);
+    padding: 30px 300px 20px;
+}
+
+.page-footer .footer-card {
+    width: calc((100% - 100px) / 3);
+    box-shadow: 0 1px 15px 0 var(--secondary-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    height: 12rem;
+}
+
+.page-footer .footer-card .top {
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--light-text);
+}
+
+.page-footer .footer-card .top h4 {
+    color: var(--light-text);
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.page-footer .footer-card .content {
+    color: var(--light-text);
+    line-height: 1.7;
+}
+
+.page-footer .footer-card .content p {
+    margin-top: 20px;
+}
+
+.page-footer .footer-card .content p span {
+    font-weight: 700;
+}
+
+.page-footer .footer-card .content li {
+    margin-bottom: 10px;
+}
+
+.page-footer .footer-card .footer-links ::marker {
+    content: '--';
+    font-size: 20px;
+    color: var(--light-text);
+}
+
+.page-footer .footer-card .footer-links li {
+    padding: 4px 8px;
+    transition: 0.3s;
+    /*border: 1px solid white;*/
+}
+
+.page-footer .footer-card .footer-links li:hover {
+    transform: translateX(10px);
+}
+
+.page-footer .footer-card .footer-links li a {
+    color: var(--light-text);
+}
+
+.page-footer .footer-card .footer-links li:hover a {
+    color: var(--secondary-color);
+}
+
+.page-content {
+    margin: 100px auto 0;
+    min-width: 90%;
+    padding: 10px 20px;
+    border-inline: 1px solid var(--dark-color);
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.page-content .card {
+    padding: 10px 20px 30px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 2px var(--box-shadow-color);
+}
+
+.page-content .card .title {
+    border-bottom: 1px solid var(--dark-color);
+    margin-bottom: 20px;
+}
+
+.page-content .card .title h4 {
+    color: var(--dark-color);
+    font-weight: 700;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.page-content .card .content {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.page-content .card .content .stats-box {
+    width: calc((100% - 30px) / 2);
+    background-color: var(--neutral);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 2px var(--box-shadow-color);
+    padding: 10px 20px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.page-content .card .content .stats-box:hover {
+    background-color: var(--light-text);
+}
+
+.page-content .card .content .stats-box h5 {
+    color: var(--dark-color);
+    font-size: 23px;
+    border-bottom: 1px solid var(--dark-color);
+    margin-bottom: 20px;
+}
+
+.page-content .card .content .stats-box .stats {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.page-content .card .content .stats-box .stats svg {
+    width: 60px;
+    height: 60px;
+    fill: var(--main-color);
+}
+
+.page-content .card .content .stats-box .stats .data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-content .card .content .stats-box .stats .data span:first-child {
+    font-size: 19px;
+    color: var(--primary-text);
+}
+
+.page-content .card .content .stats-box .stats .data .number {
+    font-size: 22px;
+    color: var(--primary-text);
+}
+
+.page-content .card .content article {
+    text-indent: 20px;
+    line-height: 1.6;
+    font-size: 18px;
+    color: var(--primary-text);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.page-content .card .content article svg {
+    width: 120px;
+    height: 120px;
+    fill: var(--main-color);
+    padding-right: 20px;
+    border-right: 1px solid var(--dark-color);
+}
+
+.page-content .card .content .empty-table {
+    font-size: 25px;
+    color: var(--primary-text);
+    font-weight: 700;
+}
+.page-content .card .content .table-container {
+    width: 100%;
+}
+.page-content .card .content table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 15px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.page-content .card .content table thead tr {
+    background-color: var(--main-color);
+    color: var(--light-text);
+    text-align: left;
+
+}
+
+.page-content .card .content table th {
+    padding: 15px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 18px;
+    /*letter-spacing: 0.7px;*/
+}
+
+.page-content .card .content table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.page-content .card .content table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.page-content .card .content table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.page-content .card .content table tbody tr:hover {
+    background-color: #e9f0ff;
+}
+
+.page-content .card .content table tbody td {
+    padding: 15px 20px;
+    color: var(--primary-text);
+    font-size: 15px;
+
+}
+
+.page-content .card .content .foot {
+    font-size: 18px;
+    color: var(--primary-text);
+    padding-top: 10px;
+    border-top: 1px solid var(--dark-color);
+    width: 100%;
+    text-align: center;
+}
+
+.page-content .card .content .faq-list {
+    width: 100%;
+}
+
+.page-content .card .content .faq-list .faq-item {
+    margin-block: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 1px 1px 10px 2px var(--box-shadow-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: var(--neutral);
+    transition: 0.3s;
+}
+
+.page-content .card .content .faq-list .faq-item:hover {
+    background-color: var(--light-text);
+}
+
+.page-content .card .content .faq-list .faq-item .question {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+    letter-spacing: 0.8px;
+}
+
+.page-content .card .content .faq-list .faq-item .answer-list {
+    list-style: lower-latin;
+}
+
+.page-content .card .content .faq-list .faq-item .answer-list .answer-row {
+    font-size: 18px;
+    letter-spacing: 0.7px;
+    color: var(--primary-text);
+}
+
+.page-content .card .content .faq-list .faq-item svg {
+    fill: var(--main-color);
+    width: 100px;
+    height: 100px;
+    margin-right: 100px;
+}
+
+.page-content .card form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.page-content .card form .form-row {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.page-content .card form .form-row label {
+    font-size: 20px;
+    color: var(--dark-color);
+    margin: 0 0 8px 20px;
+}
+
+.page-content .card form .form-row input,
+.page-content .card form .form-row select,
+.page-content .card form .form-row textarea {
+    height: 40px;
+    border: 1px solid var(--secondary-text);
+    border-radius: 8px;
+    padding: 5px 20px;
+    transition: 0.3s;
+    color: var(--primary-text);
+    outline: none;
+}
+
+.page-content .card form .form-row textarea {
+    height: 140px;
+    resize: none;
+    overflow-y: auto;
+}
+
+.page-content .card form .form-row input:focus,
+.page-content .card form .form-row select:focus,
+.page-content .card form .form-row textarea:focus {
+    border: 1px solid var(--main-color);
+    background-color: var(--neutral);
+}
+
+.page-content .card form button {
+    background-color: var(--main-color);
+    color: var(--light-text);
+    padding: 8px 15px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.page-content .card form button:hover {
+    background-color: var(--dark-color);
+}
+
+.page-content .card .quick-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 30px;
+}
+
+.page-content .card .quick-actions .action {
+    border: 2px solid;
+    padding: 7px 15px;
+    width: calc((100% - 50px) / 5);
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.page-content .card .quick-actions .action svg {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.page-content .card .quick-actions .action span {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.page-content .card .quick-actions .action.action1 {
+    border-color: var(--main-color);
+    background-color: rgba(153, 193, 255, 0.3);
+    color: var(--main-color);
+    fill: var(--main-color);
+}
+
+.page-content .card .quick-actions .action.action1:hover {
+    background-color: rgba(153, 193, 255, 0.8);
+}
+
+.page-content .card .quick-actions .action.action2 {
+    border-color: var(--warning);
+    background-color: rgba(255, 224, 130, 0.3);
+    color: var(--warning);
+    fill: var(--warning);
+}
+
+.page-content .card .quick-actions .action.action2:hover {
+    background-color: rgba(255, 224, 130, 0.8);
+}
+
+.page-content .card .quick-actions .action.action3 {
+    border-color: var(--success);
+    background-color: rgba(149, 243, 154, 0.3);
+    color: var(--success);
+    fill: var(--success);
+}
+
+.page-content .card .quick-actions .action.action3:hover {
+    background-color: rgba(149, 243, 154, 0.8);
+}
+
+.page-content .card .quick-actions .action.action4 {
+    border-color: var(--danger);
+    background-color: rgba(250, 140, 132, 0.3);
+    color: var(--danger);
+    fill: var(--danger);
+}
+
+.page-content .card .quick-actions .action.action4:hover {
+    background-color: rgba(250, 140, 132, 0.8);
+}
+
+.page-content .card .quick-actions .action.action5 {
+    border-color: var(--secondary-color);
+    background-color: rgba(128, 231, 255, 0.3);
+    color: var(--secondary-color);
+    fill: var(--secondary-color);
+}
+
+.page-content .card .quick-actions .action.action5:hover {
+    background-color: rgba(128, 231, 255, 0.5);
+}
+
+.page-content .emergency .content {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.page-content .emergency .content .contact-box {
+    border: 1px solid var(--secondary-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: var(--neutral);
+    box-shadow: 1px 1px 10px 2px var(--box-shadow-color);
+}
+
+.page-content .emergency .content .contact-box h5 {
+    width: 100%;
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--secondary-color);
+    color: var(--dark-color);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.page-content .emergency .content .contact-box p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    color: var(--primary-text);
+}
+
+.page-content .emergency .content .contact-box .call-hours {
+    font-size: 16px;
+    color: var(--secondary-text);
+}
+
+.page-content .card:last-child {
+    margin-bottom: 50px;
+}
+.page-content .card table .filter-head-cell .filter-form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}
+.page-content .card table .filter-head-cell .filter-form select {
+    border: none;
+    color: var(--light-text);
+    padding-right: 10px;
+}
+.page-content .card table .filter-head-cell .filter-form select:focus {
+    background-color: var(--dark-color);
+}
+.page-content .card table .filter-head-cell .filter-form button {
+    margin-bottom: 8px;
 }

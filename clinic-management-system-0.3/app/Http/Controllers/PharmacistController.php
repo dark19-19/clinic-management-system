@@ -3,38 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePharmacistDataRequest;
+use App\Http\Requests\UpdatePharamcistDataRequest;
 use App\Http\Resources\PharmacistResource;
+use App\Models\Pharmacist;
 use App\Services\PharmacistService;
+use Illuminate\Http\Request;
 
 class PharmacistController extends Controller
 {
     public function store(StorePharmacistDataRequest $request) {
-        $pharmacist = PharmacistService::store($request);
-        return response()->json([
-            'message' => 'Pharmacist data stored successfully',
-            'pharmacist' => new PharmacistResource($pharmacist)
-        ],200);
+        PharmacistService::store($request);
+        return redirect(route('pharma.index'));
     }
-    public function index() {
-        return response()->json([
-            'mesage' => 'Here are all the registered pharmacists',
-            'pharmacists' => PharmacistService::index()
-        ],200);
+    public function update(UpdatePharamcistDataRequest $request, int $pharmacist_id) {
+        PharmacistService::update($request,$pharmacist_id);
+        return redirect(route('pharma.index'));
+    }
+    public function search(Request $request) {
+        $array = PharmacistService::search($request);
+        return view('admins.pharmas.search', [
+            'pharmacist' => $array['pharmacist'],
+            'query' => $array['query']
+        ]);
     }
     public function destroy(int $pharmacist_id) {
         PharmacistService::destroy($pharmacist_id);
-        return response()->json([
-            'message' => 'Pharmacist data has been deleted'
-        ],200);
+        return redirect(route('pharma.index'));
     }
-    public function show(int $pharmacist_id) {
-        return response()->json([
-            'pharmacist' => PharmacistService::showById($pharmacist_id)
-        ],200);
+    public function showCenter() {
+        $pharmacists = PharmacistService::index();
+        return view('admins.pharmas.index', [
+            'pharmacists' => $pharmacists
+        ]);
     }
-    public function showByLicenseNumber(string $licenseNumber) {
-        return response()->json([
-            'pharmacist' => PharmacistService::showByLicenseNumber($licenseNumber)
-        ],200);
+    public function showStore() {
+        return view('admins.pharmas.create');
+    }
+    public function showSearch() {
+        return view('admins.pharmas.search');
+    }
+    public function showUpdate(int $pharmacist_id)  {
+        $pharmacist = Pharmacist::findOrFail($pharmacist_id);
+        return view('admins.pharmas.edit', [
+            'pharmacist' => $pharmacist
+        ]);
     }
 }

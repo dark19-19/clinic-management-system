@@ -22,10 +22,10 @@ class UpdateDoctorDataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'integer|required|exists:doctors,user_id|unique:doctors,user_id',
-            'specialization' => 'sometimes|string|max:255',
-            'license_number' => 'sometimes|string|max:255',
-            'qualifications' => 'sometimes|string'
+            'qualifications' => 'sometimes|string|nullable',
+            'address' => 'sometimes|string|',
+            'call_hours' => 'sometimes|string|',
+            'available_hours' => 'sometimes|string'
         ];
     }
 }

@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Dark Clinic',
             'email' => 'dark.official@clin.de',
             'password' => Hash::make('123456789'),
-            'role_id' => 2
+            'role_id' => 1
         ]);
     }
 }

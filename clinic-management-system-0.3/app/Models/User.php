@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Session;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -22,7 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id'
+        'role_id',
+        'status',
+        'last_login_at'
     ];
 
     /**
@@ -49,7 +52,7 @@ class User extends Authenticatable
     }
     public function role()
     {
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class);
     }
     public function patient()
     {
@@ -59,8 +62,31 @@ class User extends Authenticatable
     {
         return $this->hasOne(Doctor::class);
     }
+    public function staff() {
+        return $this->hasOne(Staff::class);
+    }
     public function pharmacist()
     {
         return $this->hasOne(Pharmacist::class);
     }
+    public function appointments() {
+        return $this->hasMany(Appointment::class);
+    }
+    public function medicalRecord() {
+        return $this->hasMany(MedicalRecord::class);
+    }
+    public function userAppointment() {
+        return $this->hasOne(UserAppointment::class);
+    }
+
+    public function login() {
+        $this->update([
+            'last_login_at' => now()
+        ]);
+    }
+    public function logout() {
+        $session = Session::where('user_id', $this->id)->first();
+        $session->delete();
+    }
+
 }
